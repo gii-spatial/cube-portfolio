@@ -1,7 +1,8 @@
 import { type ReactElement, useState } from "react";
-import Modal from "@/components/ui/Modal";
+import BaseModal from "@/components/_core/modals/BaseModal";
+import SpinningCube from "@/components/_core/animations/SpinningCube";
 
-export default function AboutCube(): ReactElement {
+export default function AboutCubeDialog(): ReactElement {
   const [modalOpen, setModalOpen] = useState(false);
 
   const handleModalOpen = () => {
@@ -24,19 +25,26 @@ export default function AboutCube(): ReactElement {
       >
         About the cube
       </div>
-      <Modal
+      <BaseModal
         open={modalOpen}
         onClose={handleModalClose}
         contentClassName="border border-border/70 ring-1 ring-gray-300"
       >
-        <Modal.Header>
+        <BaseModal.Header className="flex flex-col items-center gap-1">
+          {/* header content */}
           <h2 className="font-quantico text-2xl uppercase tracking-widest text-gray-900">
-            The Cube
+            Cube
           </h2>
-          <div className="mx-auto mt-3 h-[2px] w-16 bg-gradient-to-r from-transparent via-gray-400 to-transparent" />
-        </Modal.Header>
 
-        <Modal.Body className="relative overflow-hidden flex flex-col gap-2">
+          {/* animated underline */}
+          <div className="flex flex-1 flex-row w-fit items-center gap-2">
+            <div className=" h-[2px] w-16 bg-gradient-to-r from-transparent via-gray-400 to-transparent" />
+            <SpinningCube />
+            <div className=" h-[2px] w-16 bg-gradient-to-l from-transparent via-gray-400 to-transparent" />
+          </div>
+        </BaseModal.Header>
+
+        <BaseModal.Body className="relative overflow-hidden flex flex-col gap-2">
           <p>
             It started as a midnight thought —
             <span className="italic">“cube, cube... cube 🤔?”</span> — and
@@ -52,9 +60,9 @@ export default function AboutCube(): ReactElement {
             how each perspective connects to form the complete picture of my
             journey.
           </p>
-        </Modal.Body>
+        </BaseModal.Body>
 
-        <Modal.Footer>
+        <BaseModal.Footer>
           <button
             onClick={handleModalClose}
             className="
@@ -70,8 +78,8 @@ export default function AboutCube(): ReactElement {
           >
             Close
           </button>
-        </Modal.Footer>
-      </Modal>
+        </BaseModal.Footer>
+      </BaseModal>
     </>
   );
 }

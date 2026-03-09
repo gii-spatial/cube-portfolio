@@ -1,5 +1,4 @@
 import { type ReactElement } from "react";
-import AppHeader from "./components/features/AppHeader";
 import Cube, { CubeProvider } from "./components/features/Cube";
 import { CubeFaceZoom } from "@/components/features/Cube/extensions";
 import {
@@ -10,34 +9,15 @@ import {
   CubeFaceRight,
   CubeFaceTop,
 } from "@/components/features/CubeFaces";
+import Header from "./components/views/root/Header";
+import Footer from "./components/views/root/Footer";
+import AboutCube from "./components/views/root/Header/AboutCubeDialog";
+import Main from "./components/views/root/Main";
 
 export default function App(): ReactElement {
   return (
-    <div className="relative flex flex-col flex-1 w-full">
-      <AppHeader />
-      <div className="relative flex flex-1 justify-center ">
-        <CubeProvider>
-          <Cube
-            initialAngle={{ x: -15, y: -40 }}
-            faceLabels={{
-              front: "FRONT",
-              back: "BACK",
-              left: "LEFT",
-              right: "Journey",
-              bottom: "BOTTOM",
-              top: "Arsenal",
-            }}
-          />
-          <CubeFaceZoom
-            FaceFrontComponent={CubeFaceFront}
-            FaceLeftComponent={CubeFaceLeft}
-            FaceBackComponent={CubeFaceBack}
-            FaceBottomComponent={CubeFaceBottom}
-            FaceRightComponent={CubeFaceRight}
-            FaceTopComponent={CubeFaceTop}
-          />
-        </CubeProvider>
-      </div>
+    <div className="relative flex flex-col w-full h-full">
+      <Main />
     </div>
   );
 }
