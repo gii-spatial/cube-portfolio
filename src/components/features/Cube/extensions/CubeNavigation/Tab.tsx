@@ -1,5 +1,5 @@
 import { type ReactElement, type ReactNode } from "react";
-import { type CubeFace } from "@/interfaces/cube";
+import type { CubeFace } from "../../cube.interface";
 
 interface TabProps {
   face: CubeFace;

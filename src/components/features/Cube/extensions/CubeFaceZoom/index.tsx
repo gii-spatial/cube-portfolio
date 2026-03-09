@@ -39,8 +39,6 @@ export default function CubeFaceZoom(props: CubeFaceZoomProps): ReactElement {
         return FaceRightComponent ? <FaceRightComponent /> : <ZoomFallback />;
       case "top":
         return FaceTopComponent ? <FaceTopComponent /> : <ZoomFallback />;
-      case "bottom":
-        return FaceBottomComponent ? <FaceBottomComponent /> : <ZoomFallback />;
       default:
         return <ZoomFallback />;
     }
