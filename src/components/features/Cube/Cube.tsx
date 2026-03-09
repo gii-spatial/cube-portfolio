@@ -22,10 +22,10 @@ const VELOCITY_MULTIPLIER = 0.55;
 
 interface CubeProps {
   initialAngle?: { x: number; y: number; z?: number };
-  faceLabels: Record<CubeFace, string>;
+  faceProps: Record<CubeFace, { label: string; icon?: ReactElement }>;
 }
 export default function Cube(props: CubeProps): ReactElement {
-  const { initialAngle, faceLabels } = props;
+  const { initialAngle, faceProps } = props;
   const { rotateX, rotateY, rotateToFace } = useCube();
 
   const isAutoRotating = useAtomValue(CubeAtom.isAutoRotating);
@@ -190,10 +190,11 @@ export default function Cube(props: CubeProps): ReactElement {
               key={face}
               id={`3dcube-face-${face}`}
               className={`face ${face}`}
-              style={{ background: CubeFaceColors[face] }}
+              // style={{ background: CubeFaceColors[face] }}
               onClick={() => handleFaceClick(face)}
             >
-              {faceLabels[face]}
+              {faceProps[face].icon}
+              {faceProps[face].label}
             </motion.div>
           ))}
         </motion.div>
