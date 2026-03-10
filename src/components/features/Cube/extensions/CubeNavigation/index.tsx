@@ -6,15 +6,14 @@ import Capsule from "./Capsule";
 import Tab from "./Tab";
 import CubeAtom from "../../cube.atoms";
 import "./CubeNavigation.css";
-
+import { ChevronDown } from "lucide-react";
 export interface CubeNavigationProps {
+  faceLabel?: Partial<Record<CubeFace, string>>;
   onNavigate: (face: CubeFace) => void;
 }
 
-export default function CubeNavigation(
-  props: CubeNavigationProps,
-): ReactElement {
-  const { onNavigate } = props;
+function DesktopCubeNavigation(props: CubeNavigationProps): ReactElement {
+  const { faceLabel, onNavigate } = props;
   const currentCubeFace = useAtomValue(CubeAtom.currentFace);
   const [position, setPosition] = useState<CapsulePosition>({
     left: 0,
@@ -71,10 +70,66 @@ export default function CubeNavigation(
           registerRef={registerTabRef}
           onPress={handleTabPress}
         >
-          {face}
+          {faceLabel?.[face] ?? face}
         </Tab>
       ))}
       <Capsule position={position} />
     </ul>
   );
+}
+
+export interface BaseCubeNavigationProps {
+  faceLabel?: Partial<Record<CubeFace, string>>;
+  onNavigate: (face: CubeFace) => void;
+}
+
+function MobileNavigation(props: BaseCubeNavigationProps): ReactElement {
+  const { faceLabel, onNavigate } = props;
+  return (
+    <div className="relative w-full max-w-xs h-fit">
+      <select
+        className="
+          w-full
+          p-2 pl-3 pr-10
+          bg-transparent
+          text-white
+          text-base
+          rounded-sm
+          outline outline-1 outline-white/60
+          focus:outline-2 focus:outline-white
+          appearance-none
+          cursor-pointer
+          transition
+          hover:bg-white/10
+        "
+        onChange={(e) => onNavigate(e.target.value as CubeFace)}
+        defaultValue={CubeFaces[0]}
+      >
+        {CubeFaces.map((face) => (
+          <option key={face} value={face} className="text-black">
+            {faceLabel?.[face] ?? face}
+          </option>
+        ))}
+      </select>
+
+      {/* Down arrow */}
+      <ChevronDown className="absolute right-3 top-1/2 -translate-y-1/2 w-5 h-5 text-white pointer-events-none" />
+    </div>
+  );
+}
+
+export default function CubeNavigation(props: BaseCubeNavigationProps) {
+  const [isMobile, setIsMobile] = useState(
+    typeof window !== "undefined" ? window.innerWidth < 660 : false,
+  );
+
+  useEffect(() => {
+    const handleResize = () => setIsMobile(window.innerWidth < 660);
+    window.addEventListener("resize", handleResize);
+    return () => window.removeEventListener("resize", handleResize);
+  }, []);
+
+  if (isMobile) return <MobileNavigation {...props} />;
+
+  return <DesktopCubeNavigation {...props} />;
 }

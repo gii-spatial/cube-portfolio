@@ -6,7 +6,6 @@ export default function Header(): ReactElement {
     <header
       className=" relative flex flex-row items-center
         w-full h-fit py-3 px-6
-        text-foreground
         z-[100]"
     >
       <AboutCubeDialog />
