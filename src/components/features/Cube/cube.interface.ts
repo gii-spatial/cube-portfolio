@@ -1,12 +1,3 @@
-export const CubeFaceColors: Record<CubeFace, string> = {
-  front: "rgba(0,150,255,1)",
-  back: "rgba(255,50,50,1)",
-  left: "rgba(0,200,100,1)",
-  right: "rgba(255,200,0,1)",
-  top: "rgba(150,0,255,1)",
-  bottom: "rgba(0,255,200,1)",
-};
-
 export const CubeFaceRotation: Record<CubeFace, { x: number; y: number }> = {
   front: { x: 0, y: 0 },
   back: { x: 0, y: 180 },

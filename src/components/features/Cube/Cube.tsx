@@ -1,7 +1,7 @@
 import { type ReactElement, useEffect, useRef } from "react";
 import { useAtom, useAtomValue, useSetAtom } from "jotai";
 import { motion } from "framer-motion";
-import { CubeFaceColors, CubeFaces, type CubeFace } from "./cube.interface";
+import { CubeFaces, type CubeFace } from "./cube.interface";
 import CubeAtom from "./cube.atoms";
 import "./Cube.css";
 import useCube from "./useCube";
