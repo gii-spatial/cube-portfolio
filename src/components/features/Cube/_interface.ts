@@ -24,3 +24,12 @@ export type FaceRectangle = {
   width: number;
   height: number;
 };
+
+export const CubeFaceIds: Record<CubeFace, string> = {
+  top: "cube-3d-top",
+  right: "cube-3d-right",
+  back: "cube-3d-back",
+  front: "cube-3d-front",
+  left: "cube-3d-left",
+  bottom: "cube-3d-bottom",
+};

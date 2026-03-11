@@ -1,5 +1,5 @@
 import { useAtomValue, useSetAtom } from "jotai";
-import CubeAtom from "../../cube.atoms";
+import CubeAtom from "../../_atoms";
 
 interface UseCubeFaceZoomReturn {
   zoomOut: () => void;

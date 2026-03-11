@@ -1,17 +1,10 @@
 import { type ReactElement, useEffect, useRef } from "react";
 import { useAtom, useAtomValue, useSetAtom } from "jotai";
 import { motion } from "framer-motion";
-import { CubeFaces, type CubeFace } from "./cube.interface";
-import CubeAtom from "./cube.atoms";
-import "./Cube.css";
-import useCube from "./useCube";
-
-/**
- * Adjust this value to make dragging more or less sensitive
- * Higher the value, the less sensitive it gets
- * Lower the value, the more sensitive it gets.
- */
-const DRAG_SENSITIVITY = 4;
+import { CubeFaceIds, CubeFaces, type CubeFace } from "./_interface";
+import CubeAtom from "./_atoms";
+import useCube from "./useCube3d";
+import "./cube3d.css";
 
 /**
  * Adjust this value to make the inertia/momentum effect more or less pronounced.
@@ -20,20 +13,20 @@ const DRAG_SENSITIVITY = 4;
  */
 const VELOCITY_MULTIPLIER = 0.55;
 
-interface CubeProps {
+interface Props {
   initialAngle?: { x: number; y: number; z?: number };
-  faceProps: Record<CubeFace, { label: string; icon?: ReactElement }>;
+  // ! to check
+  faceProps: Record<CubeFace, ReactElement>;
 }
-export default function Cube(props: CubeProps): ReactElement {
+
+export default function Cube3D(props: Props): ReactElement {
   const { initialAngle, faceProps } = props;
-  const { rotateX, rotateY, rotateToFace } = useCube();
+  const { rotateX, rotateY } = useCube();
 
   const isAutoRotating = useAtomValue(CubeAtom.isAutoRotating);
-  const setFaceRectangle = useSetAtom(CubeAtom.faceRectangle);
-  const [faceZoom, setFaceZoom] = useAtom(CubeAtom.faceZoom);
+  const [faceZoom] = useAtom(CubeAtom.faceZoom);
 
   const cubeRef = useRef<HTMLDivElement>(null);
-  const cubeFaceAnimatingRef = useRef<boolean>(false);
 
   // Inertia/momentum state
   const draggingRef = useRef<boolean>(false);
@@ -122,43 +115,11 @@ export default function Cube(props: CubeProps): ReactElement {
     }
   };
 
-  const handleFaceClick = async (face: CubeFace) => {
-    /**
-     * Should prevent click actions if the user was dragging
-     * instead of intentially clicking the cube face.
-     * We can determine this by checking if the drag distance
-     * exceeds a small threshold or if the dragging is still true.
-     */
-    if (draggingRef.current || dragDistanceRef.current > DRAG_SENSITIVITY)
-      return;
-
-    // Prevent multiple rapid clicks while an animation is still running
-    if (cubeFaceAnimatingRef.current) return;
-    if (dragDistanceRef.current > DRAG_SENSITIVITY || faceZoom !== null) return;
-
-    /**
-     * Trigger a zoom animation to cube face
-     * Should only run after the rotation animation completes.
-     */
-    await rotateToFace(face);
-    const el = document.getElementById(`3dcube-face-${face}`);
-    if (el) {
-      const { top, left, width, height } = el.getBoundingClientRect();
-      setFaceRectangle({ top, left, width, height });
-
-      // trigger zoom
-      setFaceZoom(face);
-      cubeFaceAnimatingRef.current = false;
-      return;
-    }
-  };
-
   const handleMouseLeave = () => {
     handleEnd();
     if (momentumFrame.current) cancelAnimationFrame(momentumFrame.current);
   };
 
-  // This allows the cube to render at a specific orientation
   useEffect(() => {
     if (initialAngle !== undefined) {
       rotateX.set(initialAngle.x || 0);
@@ -167,38 +128,33 @@ export default function Cube(props: CubeProps): ReactElement {
   }, [initialAngle, rotateX, rotateY]);
 
   return (
-    <>
+    <motion.div
+      className="scene"
+      onMouseDown={handleStart}
+      onMouseMove={handleMove}
+      onMouseUp={handleEnd}
+      onMouseLeave={handleMouseLeave}
+      onTouchStart={handleStart}
+      onTouchMove={handleMove}
+      onTouchEnd={handleEnd}
+    >
+      {/* 3D Cube */}
       <motion.div
-        className="scene"
-        onMouseDown={handleStart}
-        onMouseMove={handleMove}
-        onMouseUp={handleEnd}
-        onMouseLeave={handleMouseLeave}
-        onTouchStart={handleStart}
-        onTouchMove={handleMove}
-        onTouchEnd={handleEnd}
+        className="cube"
+        ref={cubeRef}
+        style={{ rotateX, rotateY, scale: faceZoom ? 0.7 : 1 }}
+        transition={{ duration: 0.8, ease: "easeInOut" }}
       >
-        {/* 3D Cube */}
-        <motion.div
-          className="cube"
-          ref={cubeRef}
-          style={{ rotateX, rotateY, scale: faceZoom ? 0.7 : 1 }}
-          transition={{ duration: 0.8, ease: "easeInOut" }}
-        >
-          {CubeFaces.map((face) => (
-            <motion.div
-              key={face}
-              id={`3dcube-face-${face}`}
-              className={`face ${face}`}
-              // style={{ background: CubeFaceColors[face] }}
-              onClick={() => handleFaceClick(face)}
-            >
-              {faceProps[face].icon}
-              {faceProps[face].label}
-            </motion.div>
-          ))}
-        </motion.div>
+        {CubeFaces.map((face) => (
+          <motion.div
+            key={face}
+            id={CubeFaceIds[face]}
+            className={`face ${face}`}
+          >
+            {faceProps[face]}
+          </motion.div>
+        ))}
       </motion.div>
-    </>
+    </motion.div>
   );
 }

@@ -1,7 +1,7 @@
 import type { ReactElement, ComponentType } from "react";
 import { AnimatePresence, motion } from "framer-motion";
 import { useAtomValue, useSetAtom } from "jotai";
-import CubeAtom from "../../cube.atoms";
+import CubeAtom from "../../_atoms";
 import ZoomFallback from "./ZoomFallback";
 
 interface CubeFaceZoomProps {

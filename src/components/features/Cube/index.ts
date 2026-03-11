@@ -1,5 +1,5 @@
-export { default } from "./Cube";
-export type { CubeFace } from "./cube.interface";
-export * from "./cube.utils";
-export * from "./cube.atoms";
-export { default as CubeProvider } from "./CubeProvider";
+export { default } from "./Cube3D";
+export type { CubeFace } from "./_interface";
+export * from "./_utils";
+export * from "./_atoms";
+export { default as Cube3DProvider } from "./Cube3DProvider";

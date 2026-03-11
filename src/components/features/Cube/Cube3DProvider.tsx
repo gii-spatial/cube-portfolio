@@ -1,9 +1,9 @@
 import { Provider } from "jotai";
 
-interface CubeProviderProps {
+export default function Cube3DProvider({
+  children,
+}: {
   children: React.ReactNode;
-}
-
-export default function CubeProvider({ children }: CubeProviderProps) {
+}) {
   return <Provider>{children}</Provider>;
 }

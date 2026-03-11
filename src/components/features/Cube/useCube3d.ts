@@ -1,23 +1,19 @@
-import { useRef } from "react";
 import { useSetAtom, useAtomValue } from "jotai";
-import { animate, MotionValue, useMotionValue } from "framer-motion";
-import CubeAtom from "./cube.atoms";
-import CubeUtils from "./cube.utils";
-import { type CubeFace, CubeFaceRotation } from "./cube.interface";
+import { animate, MotionValue } from "framer-motion";
+import CubeAtom from "./_atoms";
+import CubeUtils from "./_utils";
+import { type CubeFace, CubeFaceRotation } from "./_interface";
 
 interface UseCubeReturn {
   rotateX: MotionValue<number>;
   rotateY: MotionValue<number>;
   rotateToFace: (face: CubeFace) => Promise<void>;
 }
-export default function useCube(): UseCubeReturn {
-  const currentFace = useAtomValue(CubeAtom.currentFace);
+export default function useCube3d(): UseCubeReturn {
   const setIsAutoRotating = useSetAtom(CubeAtom.isAutoRotating);
 
-  const faceRotation = CubeFaceRotation[currentFace];
-
-  const rotateX = useRef(useMotionValue(faceRotation.x)).current;
-  const rotateY = useRef(useMotionValue(faceRotation.y)).current;
+  const rotateX = useAtomValue(CubeAtom.rotateX);
+  const rotateY = useAtomValue(CubeAtom.rotateY);
 
   const rotateToFace = async (face: CubeFace) => {
     const target = CubeFaceRotation[face];
