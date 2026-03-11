@@ -1,5 +1,5 @@
 import { type ReactElement, useEffect, useRef } from "react";
-import { useAtom, useAtomValue, useSetAtom } from "jotai";
+import { useAtom, useAtomValue } from "jotai";
 import { motion } from "framer-motion";
 import { CubeFaceIds, CubeFaces, type CubeFace } from "./_interface";
 import CubeAtom from "./_atoms";

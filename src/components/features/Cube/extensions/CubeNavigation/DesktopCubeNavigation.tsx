@@ -103,7 +103,7 @@ export default function DesktopCubeNavigation(
     });
   };
 
-  const handleTabPress = (face: CubeFace, el: HTMLLIElement) => {
+  const handleTabPress = (face: CubeFace) => {
     if (hideFaces.includes(face)) return;
     updateCapsule(face);
     onChange(face);

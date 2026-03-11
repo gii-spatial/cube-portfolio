@@ -1,4 +1,4 @@
-import { useRef, type ReactElement } from "react";
+import { type ReactElement } from "react";
 import { motion } from "framer-motion";
 import Cube3D, { Cube3DProvider } from "@/components/features/Cube";
 import SVG from "@/assets/svg-icons";
@@ -11,13 +11,6 @@ import TopFace from "./faces/TopFace";
 import RightFace from "./faces/RightFace";
 
 export default function Cube(): ReactElement {
-  const topRef = useRef<HTMLDivElement>(null);
-  const rightRef = useRef<HTMLDivElement>(null);
-  const backRef = useRef<HTMLDivElement>(null);
-  const frontRef = useRef<HTMLDivElement>(null);
-  const leftRef = useRef<HTMLDivElement>(null);
-  const bottomRef = useRef<HTMLDivElement>(null);
-
   return (
     <div className="relative flex flex-1 flex-col items-center justify-center gap-12">
       <Cube3DProvider>

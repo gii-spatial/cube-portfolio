@@ -1,43 +1,43 @@
 import { type ReactElement, useRef } from "react";
-import { motion, useScroll, useSpring, useTransform } from "framer-motion";
+import { motion } from "framer-motion";
 import { Building } from "lucide-react";
 import { Journeys } from "./constants";
 
 export default function Timeline(): ReactElement {
   const scrollRef = useRef<HTMLDivElement>(null);
 
-  const { scrollYProgress } = useScroll({
-    container: scrollRef,
-  });
+  // const { scrollYProgress } = useScroll({
+  //   container: scrollRef,
+  // });
 
-  const smoothProgress = useSpring(scrollYProgress, {
-    stiffness: 85,
-    damping: 24,
-    mass: 1,
-    restDelta: 0.001,
-  });
+  // const smoothProgress = useSpring(scrollYProgress, {
+  //   stiffness: 85,
+  //   damping: 24,
+  //   mass: 1,
+  //   restDelta: 0.001,
+  // });
 
-  const delayedProgress = useSpring(smoothProgress, {
-    stiffness: 65,
-    damping: 22,
-    mass: 1.05,
-    restDelta: 0.001,
-  });
+  // const delayedProgress = useSpring(smoothProgress, {
+  //   stiffness: 65,
+  //   damping: 22,
+  //   mass: 1.05,
+  //   restDelta: 0.001,
+  // });
 
-  const scaleY = useTransform(delayedProgress, [0, 1], [0, 0.985]);
+  // const scaleY = useTransform(delayedProgress, [0, 1], [0, 0.985]);
 
-  const lineOpacity = useTransform(
-    delayedProgress,
-    [0, 0.12, 1],
-    [0.5, 0.85, 1],
-  );
-  const lineY = useTransform(delayedProgress, [0, 1], [6, 0]);
+  // const lineOpacity = useTransform(
+  //   delayedProgress,
+  //   [0, 0.12, 1],
+  //   [0.5, 0.85, 1],
+  // );
+  // const lineY = useTransform(delayedProgress, [0, 1], [6, 0]);
 
-  const lineStyle = {
-    scaleY,
-    opacity: lineOpacity,
-    y: lineY,
-  };
+  // const lineStyle = {
+  //   scaleY,
+  //   opacity: lineOpacity,
+  //   y: lineY,
+  // };
 
   return (
     <div className="relative flex-1 w-full overflow-hidden">

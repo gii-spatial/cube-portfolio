@@ -1,15 +1,12 @@
 import { type ReactElement } from "react";
-import { useAtomValue } from "jotai";
 import { ChevronDown } from "lucide-react";
 import type { BaseCubeNavigationProps } from "./_interface";
 import { CubeFaces, type CubeFace } from "../../_interface";
-import CubeAtom from "../../_atoms";
 
 export default function MobileNavigation(
   props: BaseCubeNavigationProps,
 ): ReactElement {
   const { navs, faceLabel, onChange } = props;
-  const currentFace = useAtomValue(CubeAtom.currentFace);
   let availableNavs = navs !== undefined && navs.length > 0 ? navs : CubeFaces;
 
   return (
