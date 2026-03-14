@@ -1,36 +1,46 @@
 import { type ReactElement } from "react";
 import { motion } from "framer-motion";
-import SpinningCube from "@/components/_core/animations/SpinningCube";
+import SpinningCube from "@/components/features/animations/SpinningCube";
+import AstronautRocket from "@/components/features/animated-svgs/AstronautRocket";
 
 export default function Tagline(): ReactElement {
   return (
-    <>
+    <div className="flex flex-col">
       {/* Name */}
-      <motion.div
+      <motion.h1
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.8 }}
-        className="text-center"
+        className="font-light tracking-tight leading-none max-w-[90vw] overflow-visible"
+        style={{ fontSize: "clamp(2rem, 4vw, 4rem)" }}
       >
-        <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl xl:text-7xl 2xl:text-8xl font-light tracking-tight max-w-[90vw] mx-auto">
-          Hello, I'm GII
-        </h1>
-      </motion.div>
-
+        Hello, I'm GII
+        <span className="inline-block ml-2 align-top w-12 h-12 md:w-16 md:h-16 overflow-visible">
+          <div className="w-full h-full relative">
+            <AstronautRocket
+              className="absolute -top-[20px] -left-[10px] w-full h-full"
+              style={{ transform: "scale(1.5)", transformOrigin: "top left" }}
+            />
+          </div>
+        </span>
+      </motion.h1>
       {/* Tagline */}
-      <motion.div
+      <motion.h2
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.8, delay: 0.4 }}
-        className="text-center mt-4 md:mt-6 max-w-3xl mx-auto"
+        className="font-light tracking-tight text-neutral-40"
+        style={{
+          fontSize: "clamp(1rem, 2vw, 2rem)",
+          lineHeight: "1.2",
+        }}
       >
-        <h2 className="text-lg sm:text-xl md:text-2xl lg:text-3xl xl:text-3xl 2xl:text-4xl font-light tracking-tight text-neutral-400">
-          I engineer reliable web applications
-          <span className="inline-block ml-2 align-top">
-            <SpinningCube />
-          </span>
-        </h2>
-      </motion.div>
-    </>
+        Building reliable web apps with seamless experiences and clean code —
+        Crafting apps that just work
+        <span className="inline-block ml-2 align-top">
+          <SpinningCube />
+        </span>
+      </motion.h2>
+    </div>
   );
 }

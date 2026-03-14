@@ -1,6 +1,6 @@
 import { type ReactElement } from "react";
 import { motion } from "framer-motion";
-import useCubeFaceZoom from "@/components/features/Cube/extensions/CubeFaceZoom/useCubeFaceZoom";
+import useCubeFaceZoom from "@/components/features/Cube3D/extensions/CubeFaceZoom/useCubeFaceZoom";
 
 export default function Header({ title }: { title: string }): ReactElement {
   const { zoomOut } = useCubeFaceZoom();

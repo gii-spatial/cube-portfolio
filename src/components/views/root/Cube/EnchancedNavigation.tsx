@@ -4,12 +4,12 @@ import { motion } from "framer-motion";
 import { ArrowRightCircle } from "lucide-react";
 import CubeNavigation, {
   type BaseCubeNavigationProps,
-} from "@/components/features/Cube/extensions/CubeNavigation";
-import useCube from "@/components/features/Cube/useCube3d";
-import CubeAtom from "@/components/features/Cube/_atoms";
+} from "@/components/features/Cube3D/extensions/CubeNavigation";
+import useCube from "@/components/features/Cube3D/useCube3d";
+import CubeAtom from "@/components/features/Cube3D/_atoms";
 import { SupportedCubeFaceLabels } from "./_interface";
-import type { CubeFace } from "@/components/features/Cube";
-import { CubeFaceIds } from "@/components/features/Cube/_interface";
+import type { CubeFace } from "@/components/features/Cube3D";
+import { CubeFaceIds } from "@/components/features/Cube3D/_interface";
 
 export default function EnchancedNavigation(
   props: Pick<BaseCubeNavigationProps, "hideFaces" | "faceLabel">,
@@ -44,13 +44,15 @@ export default function EnchancedNavigation(
       initial={{ opacity: 0, y: 20 }}
       animate={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.8 }}
-      className="flex flex-row items-center gap-4 w-full max-w-md mx-auto"
+      className="flex flex-row items-center gap-4 max-w-md ml-4"
     >
       <CubeNavigation
         navs={navs}
         {...cubeNavProps}
         value="front"
-        onChange={(nav) => setCurrentFace(nav)}
+        onChange={(nav) => {
+          setCurrentFace(nav);
+        }}
       />
 
       <motion.button

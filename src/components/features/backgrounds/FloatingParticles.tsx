@@ -1,33 +1,72 @@
-import { type ReactElement } from "react";
+import { type ReactElement, useMemo } from "react";
 import { motion } from "framer-motion";
+import { useTheme } from "@/components/themes";
+
+interface Particle {
+  left: number;
+  top: number;
+  delay: number;
+  duration: number;
+}
 
 interface Props {
   particleColor?: string;
   backgroundColor?: string;
+  count?: number;
+  size?: number;
+  floatDistance?: number;
+  duration?: number;
+  className?: string;
 }
 
-export default function FloatingParticles({
-  particleColor = "#ffffff",
-}: Props): ReactElement {
+export default function FloatingParticles(props: Props): ReactElement {
+  const {
+    particleColor,
+    backgroundColor = "transparent",
+    count = 20,
+    size = 4,
+    floatDistance = 30,
+    duration = 3,
+    className = "",
+  } = props;
+
+  const { palette } = useTheme();
+  const particleColorFinal = particleColor ?? palette.particleColor;
+
+  const particles = useMemo<Particle[]>(() => {
+    return Array.from({ length: count }).map(() => ({
+      left: Math.random() * 100,
+      top: Math.random() * 100,
+      delay: Math.random() * 2,
+      duration: duration + Math.random() * 2,
+    }));
+  }, [count, duration]);
+
   return (
-    <div className="absolute inset-0 pointer-events-none">
-      {[...Array(20)].map((_, i) => (
+    <div
+      className={`absolute inset-0 pointer-events-none ${className}`}
+      style={{ backgroundColor }}
+    >
+      {particles.map((p, i) => (
         <motion.div
           key={i}
-          className="absolute w-1 h-1 rounded-full"
+          className="absolute rounded-full will-change-transform"
           style={{
-            backgroundColor: particleColor,
-            left: `${Math.random() * 100}%`,
-            top: `${Math.random() * 100}%`,
+            width: size,
+            height: size,
+            backgroundColor: particleColorFinal,
+            left: `${p.left}%`,
+            top: `${p.top}%`,
           }}
           animate={{
-            y: [0, -30, 0],
-            opacity: [0, 0.5, 0],
+            y: [0, -floatDistance, 0],
+            opacity: [0, 0.6, 0],
           }}
           transition={{
-            duration: 3 + Math.random() * 2,
+            duration: p.duration,
             repeat: Infinity,
-            delay: Math.random() * 2,
+            delay: p.delay,
+            ease: "easeInOut",
           }}
         />
       ))}

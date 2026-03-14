@@ -1,18 +1,18 @@
 import { type ReactElement } from "react";
 import { motion } from "framer-motion";
-import Cube3D, { Cube3DProvider } from "@/components/features/Cube";
+import Cube3D, { Cube3DProvider } from "@/components/features/Cube3D";
 import SVG from "@/assets/svg-icons";
 import { CubeFaceLayout, TempFaceLayout } from "./sides";
 import { SupportedCubeFaceLabels } from "./_interface";
 import EnchancedNavigation from "./EnchancedNavigation";
-import { CubeFaceZoom } from "@/components/features/Cube/extensions";
+import { CubeFaceZoom } from "@/components/features/Cube3D/extensions";
 import BackFace from "./faces/BackFace";
 import TopFace from "./faces/TopFace";
 import RightFace from "./faces/RightFace";
 
 export default function Cube(): ReactElement {
   return (
-    <div className="relative flex flex-1 flex-col items-center justify-center gap-12">
+    <div className="relative flex flex-1 flex-col items-center gap-12">
       <Cube3DProvider>
         <motion.div
           initial={{ opacity: 0, scale: 0.8 }}

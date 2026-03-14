@@ -1,5 +1,5 @@
 import type { ReactElement, ReactNode } from "react";
-import useCubeFaceZoom from "@/components/features/Cube/extensions/CubeFaceZoom/useCubeFaceZoom";
+import useCubeFaceZoom from "@/components/features/Cube3D/extensions/CubeFaceZoom/useCubeFaceZoom";
 import FloatingParticles from "@/components/features/backgrounds/FloatingParticles";
 
 export default function Layout({

@@ -4,15 +4,13 @@ import { motion } from "framer-motion";
 import clsx from "clsx";
 import lottieAnimations from "@/assets/lottie";
 
-interface CharacterCodingProps {
+interface Props {
   speech?: string;
   speechClassName?: string;
   className?: string;
 }
 
-export default function CharacterCoding(
-  props: CharacterCodingProps,
-): ReactElement {
+export default function CharacterCoding(props: Props): ReactElement {
   const { speech, speechClassName, className } = props;
 
   return (

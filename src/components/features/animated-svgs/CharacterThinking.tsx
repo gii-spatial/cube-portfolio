@@ -4,13 +4,11 @@ import { motion } from "framer-motion";
 import clsx from "clsx";
 import lottieAnimations from "@/assets/lottie";
 
-interface CharacterThinkingProps {
+interface Props {
   className?: string;
 }
 
-export default function CharacterThinking(
-  props: CharacterThinkingProps,
-): ReactElement {
+export default function CharacterThinking(props: Props): ReactElement {
   const { className } = props;
 
   return (

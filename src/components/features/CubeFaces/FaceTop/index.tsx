@@ -1,5 +1,5 @@
 import { type ReactElement } from "react";
-import useCubeFaceZoom from "../../Cube/extensions/CubeFaceZoom/useCubeFaceZoom";
+import useCubeFaceZoom from "../../Cube3D/extensions/CubeFaceZoom/useCubeFaceZoom";
 import Introduction from "../_shared/Introduction";
 import Layout from "../_shared/Layout";
 import Header from "../_shared/Header";

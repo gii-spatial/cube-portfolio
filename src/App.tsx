@@ -1,25 +1,20 @@
 import { type ReactElement } from "react";
-import Main from "./components/views/root/Main";
-import FloatingParticles from "./components/features/backgrounds/FloatingParticles";
+import {
+  GridPattern,
+  FloatingParticles,
+} from "@/components/features/backgrounds";
+import { useApplyTheme } from "@/components/themes";
+import Root from "@/components/views/root";
+import "./App.css";
 
 export default function App(): ReactElement {
+  useApplyTheme();
+
   return (
-    <div className="size-full flex flex-col bg-black text-white overflow-hidden">
-      {/* Background Grid Pattern */}
-      <div className="absolute inset-0 opacity-10">
-        <div
-          className="size-full"
-          style={{
-            backgroundImage: `linear-gradient(white 1px, transparent 1px), linear-gradient(90deg, white 1px, transparent 1px)`,
-            backgroundSize: "40px 40px",
-          }}
-        />
-      </div>
-
-      {/* Content proper */}
-      <Main />
-
+    <div className="appContainer size-full flex flex-col overflow-hidden">
       <FloatingParticles />
+      <GridPattern />
+      <Root />
     </div>
   );
 }

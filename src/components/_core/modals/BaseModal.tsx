@@ -22,6 +22,7 @@ type ModalComponent = React.FC<ModalProps> & {
 interface SectionProps {
   children: React.ReactNode;
   className?: string;
+  style?: React.CSSProperties;
 }
 
 /* ---------------- Main Component ---------------- */
@@ -49,7 +50,7 @@ const BaseModal: ModalComponent = ({
           {/* Backdrop */}
           <motion.div
             onClick={onClose}
-            className={`absolute inset-0 bg-white/60 backdrop-blur-sm ${overlayClassName}`}
+            className={`absolute inset-0 ${overlayClassName}`}
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
@@ -61,11 +62,7 @@ const BaseModal: ModalComponent = ({
             animate={{ opacity: 1, scale: 1, y: 0 }}
             exit={{ opacity: 0, scale: 0.96, y: 20 }}
             transition={{ type: "spring", stiffness: 240, damping: 22 }}
-            className={`relative z-10 w-full max-w-2xl rounded-3xl 
-                bg-gradient-to-br from-white to-gray-50
-                border border-gray-200
-                shadow-[0_25px_60px_-12px_rgba(0,0,0,0.15)]
-                p-10 px-8 overflow-hidden ${contentClassName}`}
+            className={`relative z-10 w-full max-w-lg md:max-w-2xl rounded-3xl shadow-[0_25px_60px_-12px_rgba(0,0,0,0.15)] p-6 md:p-10 overflow-hidden ${contentClassName}`}
           >
             {children}
           </motion.div>
@@ -76,24 +73,30 @@ const BaseModal: ModalComponent = ({
 };
 
 /* ---------------- Subcomponents ---------------- */
-
-BaseModal.Header = ({ children, className = "" }) => {
-  return <div className={`mb-6 text-center ${className}`}>{children}</div>;
+BaseModal.Header = ({ children, className = "", style }) => {
+  return (
+    <div className={`mb-6 text-center ${className}`} style={style}>
+      {children}
+    </div>
+  );
 };
 
-BaseModal.Body = ({ children, className = "" }) => {
+BaseModal.Body = ({ children, className = "", style }) => {
   return (
     <div
-      className={`font-quantico text-[15px] leading-relaxed text-gray-600 text-center ${className}`}
+      className={`font-quantico leading-relaxed text-center ${className}`}
+      style={style}
     >
       {children}
     </div>
   );
 };
 
-BaseModal.Footer = ({ children, className = "" }) => {
+BaseModal.Footer = ({ children, className = "", style }) => {
   return (
-    <div className={`mt-8 flex justify-center ${className}`}>{children}</div>
+    <div className={`mt-8 flex justify-center ${className}`} style={style}>
+      {children}
+    </div>
   );
 };
 
