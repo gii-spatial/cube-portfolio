@@ -1,5 +1,5 @@
 import { type ReactElement } from "react";
-import ApplicationVersion from "./ApplicationVersion";
+import AppVersion from "@/components/AppVersion";
 import Copyright from "./Copyright";
 
 export default function Footer(): ReactElement {
@@ -8,7 +8,7 @@ export default function Footer(): ReactElement {
       <Copyright />
       <div className="flex flex-row gap-1">
         <p>Cube portfolio -</p>
-        <ApplicationVersion />
+        <AppVersion />
       </div>
     </footer>
   );
