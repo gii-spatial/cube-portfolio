@@ -1,7 +1,7 @@
 import { type ReactElement } from "react";
 import { motion } from "framer-motion";
 import SpinningCube from "@/components/features/animations/SpinningCube";
-import AstronautRocket from "@/components/features/animated-svgs/AstronautRocket";
+import AnimatedCharacter from "./AnimatedCharacter";
 
 export default function Tagline(): ReactElement {
   return (
@@ -16,12 +16,7 @@ export default function Tagline(): ReactElement {
       >
         Hello, I'm GII
         <span className="inline-block ml-2 align-top w-12 h-12 md:w-16 md:h-16 overflow-visible">
-          <div className="w-full h-full relative">
-            <AstronautRocket
-              className="absolute -top-[20px] -left-[10px] w-full h-full"
-              style={{ transform: "scale(1.5)", transformOrigin: "top left" }}
-            />
-          </div>
+          <AnimatedCharacter />
         </span>
       </motion.h1>
       {/* Tagline */}

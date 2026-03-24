@@ -9,6 +9,7 @@ import { CubeFaceZoom } from "@/components/features/Cube3D/extensions";
 import BackFace from "./faces/BackFace";
 import TopFace from "./faces/TopFace";
 import RightFace from "./faces/RightFace";
+import CornerAccents from "./CornerAccents";
 
 export default function Cube(): ReactElement {
   return (
@@ -52,12 +53,7 @@ export default function Cube(): ReactElement {
             FaceBackComponent={BackFace}
             FaceRightComponent={RightFace}
           />
-
-          {/* border accents */}
-          <div className="absolute top-0 -left-0 w-6 h-6 border-l-2 border-t-2 border-white" />
-          <div className="absolute -top-0 -right-0 w-6 h-6 border-r-2 border-t-2 border-white" />
-          <div className="absolute -bottom-0 -left-0 w-6 h-6 border-l-2 border-b-2 border-white" />
-          <div className="absolute -bottom-0 -right-0 w-6 h-6 border-r-2 border-b-2 border-white" />
+          <CornerAccents />
         </motion.div>
 
         <EnchancedNavigation faceLabel={SupportedCubeFaceLabels} />

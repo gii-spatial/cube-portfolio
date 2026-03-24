@@ -4,9 +4,9 @@ import AppFooter from "@/components/AppFooter";
 import { useTailwindBreakpoint } from "@/hooks/useTailwindBreakpoint";
 import Motto from "./_modules/Motto";
 import Cube from "./_modules/Cube";
-import Tagline from "./_modules/Tagline";
 import StatusBadge from "./_modules/StatusBadge";
 import SocialLinks from "./_modules/SocialLinks";
+import Tagline from "./_modules/Tagline";
 
 export default function Root(): ReactElement {
   const { isTWmd } = useTailwindBreakpoint();

@@ -15,7 +15,7 @@ export const ThemePaletteRecord: Record<Theme, ThemePalette> = {
     accent: "#8B5CF6",
 
     variables: {
-      "--background": "235 40% 6%",
+      "--background": "235 40% 5%",
       "--foreground": "0 0% 100%",
       "--border": "240 20% 18%",
       "--accent": "258 90% 66%",
@@ -36,7 +36,7 @@ export const ThemePaletteRecord: Record<Theme, ThemePalette> = {
     accent: "#4CAF50",
 
     variables: {
-      "--background": "150 35% 16%",
+      "--background": "150 40% 30%",
       "--foreground": "140 100% 96%",
       "--border": "150 30% 22%",
       "--accent": "145 50% 50%",
