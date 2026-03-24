@@ -1,12 +1,12 @@
 import { type ReactElement } from "react";
 import Appheader from "@/components/AppHeader";
-import StatusBadge from "./StatusBadge";
-import Tagline from "./Tagline";
-import Cube from "./Cube";
 import AppFooter from "@/components/AppFooter";
-import Motto from "./Motto";
-import SocialLinks from "./SocialLinks";
 import { useTailwindBreakpoint } from "@/hooks/useTailwindBreakpoint";
+import Motto from "./_modules/Motto";
+import Cube from "./_modules/Cube";
+import Tagline from "./_modules/Tagline";
+import StatusBadge from "./_modules/StatusBadge";
+import SocialLinks from "./_modules/SocialLinks";
 
 export default function Root(): ReactElement {
   const { isTWmd } = useTailwindBreakpoint();
