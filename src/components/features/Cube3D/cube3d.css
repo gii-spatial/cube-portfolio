@@ -13,8 +13,8 @@
 
 .cube {
  position: relative;
-  width: 150px;
-  height: 150px;
+  width: 130px;
+  height: 130px;
   transform-style: preserve-3d;
 }
 
@@ -47,16 +47,16 @@
 }
 
 /*
- About the translateZ(75px):
- Each face of the cube is 150px wide, 
- so to position it correctly in 3D space, we need to move it half of its width (75px) away from the center of the cube along the Z-axis.
+ About the translateZ(65px):
+ Each face of the cube is 130px wide, 
+ so to position it correctly in 3D space, we need to move it half of its width (65px) away from the center of the cube along the Z-axis.
 */
-.front  { transform: rotateY(0deg) translateZ(75px); }
-.back   { transform: rotateY(180deg) translateZ(75px); }
-.right  { transform: rotateY(90deg) translateZ(75px); }
-.left   { transform: rotateY(-90deg) translateZ(75px); }
-.top    { transform: rotateX(90deg) translateZ(75px); }
-.bottom { transform: rotateX(-90deg) translateZ(75px); }
+.front  { transform: rotateY(0deg) translateZ(65px); }
+.back   { transform: rotateY(180deg) translateZ(65px); }
+.right  { transform: rotateY(90deg) translateZ(65px); }
+.left   { transform: rotateY(-90deg) translateZ(65px); }
+.top    { transform: rotateX(90deg) translateZ(65px); }
+.bottom { transform: rotateX(-90deg) translateZ(65px); }
 
 .zoom-face {
   position: fixed;

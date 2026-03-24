@@ -13,9 +13,9 @@ export default function Root(): ReactElement {
   return (
     <div className="relative flex flex-col flex-1 overflow-hidden">
       <Appheader />
-      <main className="relative flex flex-col flex-1 overflow-auto px-6 py-2">
+      <main className="relative flex flex-col flex-1 overflow-auto px-6">
         <div
-          className="relative flex flex-col flex-1 gap-14 h-full
+          className="relative flex flex-col flex-1 gap-8 h-full
           md:flex-row md:items-start"
         >
           <section
