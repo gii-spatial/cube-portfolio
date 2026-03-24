@@ -1,5 +1,13 @@
 export type Theme = "galaxy" | "forest";
 
+type CSSVariables = [
+  "--background",
+  "--foreground",
+  "--border",
+  "--accent",
+  "--cube-border",
+];
+
 export type ThemePalette = {
   id: Theme;
   title: string;
@@ -13,5 +21,5 @@ export type ThemePalette = {
   gridColor: string;
   accent: string;
 
-  variables: Record<string, string>;
+  variables: Record<CSSVariables[number], string>;
 };

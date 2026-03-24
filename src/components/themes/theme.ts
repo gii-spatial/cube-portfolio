@@ -19,6 +19,8 @@ export const ThemePaletteRecord: Record<Theme, ThemePalette> = {
       "--foreground": "0 0% 100%",
       "--border": "240 20% 18%",
       "--accent": "258 90% 66%",
+
+      "--cube-border": "#525252",
     },
   },
 
@@ -26,20 +28,22 @@ export const ThemePaletteRecord: Record<Theme, ThemePalette> = {
     id: "forest",
     title: "Forest",
 
-    background: "#1B3A2F",
+    background: "#1F3D32",
     foreground: "#E8FFF3",
-    foregroundBody: "rgba(232, 255, 243, 0.95)", // stronger than 0.85
-    border: "#2A5A44",
+    foregroundBody: "rgba(232, 255, 243, 0.9)",
+    border: "#2C4A3F",
 
-    particleColor: "rgba(144, 238, 144, 0.8)", // like galaxy
-    gridColor: "rgba(144, 238, 144, 0.08)", // keep subtle
+    particleColor: "rgba(144, 238, 144, 0.75)",
+    gridColor: "rgba(144, 238, 144, 0.06)",
     accent: "#4CAF50",
 
     variables: {
-      "--background": "150 40% 30%",
+      "--background": "150 35% 28%",
       "--foreground": "140 100% 96%",
-      "--border": "150 30% 22%",
-      "--accent": "145 50% 50%",
+      "--border": "150 15% 22%",
+      "--accent": "145 55% 52%",
+
+      "--cube-border": "#E8E8E8",
     },
   },
 };

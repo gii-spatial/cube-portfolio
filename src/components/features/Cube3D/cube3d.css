@@ -27,15 +27,14 @@
   align-items: center;
   font-weight: bold;
   
-  border: 2px solid #525252;
+  border: 2px solid;
+  border-color: var(--cube-border);
+  
 
   display: flex;
   flex-direction: column;
   gap: 4px;
 
-  /* background-color: #fff; */
-
-  
   /* Prevent text selection */
   user-select: none;      
   -webkit-user-select: none; 
