@@ -19,11 +19,11 @@ const forest: ThemePalette = {
     "--border": "150 15% 22%",
     "--accent": "145 55% 52%",
 
-    "--comp-cube-corner-accents": "#1B3B5A",
-    "--comp-cube-border-color": "#1B3B5A",
+    "--comp-cube-corner-accents": "#E8E8E8",
+    "--comp-cube-border-color": "#DCDCDC",
 
-    "--comp-motto-font-color": "210 40% 25%",
-    "--comp-motto-shine-color": "200 50% 95%",
+    "--comp-motto-font-color": "145 35% 40%",
+    "--comp-motto-shine-color": "145 60% 75%",
   },
 };
 
