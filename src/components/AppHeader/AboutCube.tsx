@@ -7,11 +7,18 @@ export default function AboutCube(): ReactElement {
   const { palette } = useTheme();
   const [modalOpen, setModalOpen] = useState(false);
 
+  const handleOpen = (): void => {
+    setModalOpen(true);
+  };
+
+  const handleClose = (): void => {
+    setModalOpen(false);
+  };
+
   return (
     <>
-      {/* Trigger */}
       <div
-        onClick={() => setModalOpen(true)}
+        onClick={handleOpen}
         className="flex items-center gap-2 font-light cursor-pointer select-none"
         style={{ color: palette.foreground }}
       >
@@ -21,13 +28,10 @@ export default function AboutCube(): ReactElement {
       {/* Modal */}
       <BaseModal
         open={modalOpen}
-        onClose={() => setModalOpen(false)}
-        contentClassName={`
-          border border-[${palette.border}/70]
-          bg-[${palette.background}]
-          text-[${palette.foreground}]
-          `}
-        overlayClassName="backdrop-blur-sm bg-black/40"
+        onClose={handleClose}
+        classNames={{
+          overlayClassName: `backdrop-blur-sm bg-[${palette.background}/80]`,
+        }}
       >
         {/* Header */}
         <BaseModal.Header className="flex flex-col items-center gap-3">
@@ -82,7 +86,7 @@ export default function AboutCube(): ReactElement {
               rounded-full px-6 py-2 text-sm uppercase tracking-wider
               transition-all duration-300
               border border-[${palette.border}]
-              text-[${palette.foreground}]
+              text-white
               bg-[${palette.background}]
               hover:bg-[${palette.accent}] hover:text-white
             `}

@@ -7,7 +7,7 @@ const snow: ThemePalette = {
   background: "#CFEFFF",
   foreground: "#0A1A2B",
   foregroundBody: "rgba(10, 26, 43, 0.72)",
-  border: "#A9D6EE",
+  border: "#1B3B5A",
 
   particleColor: "rgba(80, 120, 160, 0.85)",
   gridColor: "rgba(10, 26, 43, 0.06)",

@@ -7,7 +7,7 @@ const galaxy: ThemePalette = {
   background: "#050816",
   foreground: "#FFFFFF",
   foregroundBody: "rgba(255,255,255,0.85)",
-  border: "#1A1A2E",
+  border: "#5E3ACF",
 
   particleColor: "rgba(255,255,255,0.8)",
   gridColor: "rgba(255,255,255,0.08)",

@@ -7,7 +7,7 @@ const forest: ThemePalette = {
   background: "#1F3D32",
   foreground: "#E8FFF3",
   foregroundBody: "rgba(232, 255, 243, 0.9)",
-  border: "#2C4A3F",
+  border: "#DCDCDC",
 
   particleColor: "rgba(144, 238, 144, 0.75)",
   gridColor: "rgba(144, 238, 144, 0.06)",
