@@ -64,7 +64,6 @@ export default function EnchancedNavigation(
           flex
           items-center
           justify-center
-          text-white
           hover:bg-white/10
           transition
         "

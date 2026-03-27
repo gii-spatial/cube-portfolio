@@ -1,4 +1,4 @@
-import { type ReactElement, useState, useRef, useEffect } from "react";
+import React, { type ReactElement, useState, useRef, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { ChevronDown } from "lucide-react";
 import { useTheme } from "@/components/themes";
@@ -17,6 +17,7 @@ interface DropdownBaseProps<T extends React.Key = string> {
   className?: string;
   buttonClassName?: string;
   dropdownClassName?: string;
+  style?: React.CSSProperties;
 }
 
 export default function DropdownBase<T extends React.Key>({
@@ -27,6 +28,7 @@ export default function DropdownBase<T extends React.Key>({
   className = "",
   buttonClassName = "",
   dropdownClassName = "",
+  style,
 }: DropdownBaseProps<T>): ReactElement {
   const { palette } = useTheme();
   const [open, setOpen] = useState(false);
@@ -86,7 +88,12 @@ export default function DropdownBase<T extends React.Key>({
         ref={buttonRef}
         type="button"
         onClick={() => setOpen((prev) => !prev)}
-        className={`flex flex-row justify-between items-center bg-transparent text-[inherit] rounded-md px-2 py-2 focus:outline-none focus:ring-0 transition-all duration-150 ${buttonClassName} `}
+        className={`flex flex-row justify-between items-center bg-transparent text-[inherit] rounded-md px-2 py-2 focus:outline-none focus:ring-0 transition-all duration-150 ${buttonClassName} border-red `}
+        style={{
+          borderColor: "var(--comp-cube-border-color)",
+          borderWidth: 1,
+          borderStyle: "solid",
+        }}
       >
         <span className="flex items-center gap-2 mx-2">
           {startIcon && <span>{startIcon}</span>}
@@ -111,6 +118,7 @@ export default function DropdownBase<T extends React.Key>({
               marginBottom: dropUp ? 4 : 0,
               maxHeight: maxHeight,
               backgroundColor: palette.background,
+              ...style,
             }}
           >
             {items.map((item) => (
