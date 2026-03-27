@@ -8,13 +8,11 @@ export default function TempFaceLayout(props: Props): ReactElement {
   return (
     <div className="w-full h-full relative flex flex-col items-center justify-center">
       {props.label && (
-        <span className="text-white/80 text-xl font-bold">
-          {props.label ?? "FRONT"}
-        </span>
+        <span className="text-xl font-bold">{props.label ?? "?"}</span>
       )}
 
       {/* Subtext */}
-      <p className="text-neutral-400 text-[0.65rem] mt-1 text-center">
+      <p className="text-[0.65rem] mt-1 text-center">
         This cube face is under development
       </p>
 

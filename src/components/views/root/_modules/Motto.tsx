@@ -8,11 +8,13 @@ export default function Motto(): ReactElement {
       initial={{ opacity: 0, y: 10 }}
       animate={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.6, delay: 1.2 }}
-      className="mt-3 text-sm md:text-base font-light tracking-tight text-neutral-500 italic"
+      className="mt-3 text-sm md:text-base font-light tracking-tight italic"
     >
       <ShinyText
         text="Think outside the box, build inside the cube."
         className="whitespace-pre-line"
+        color="hsl(var(--comp-motto-font-color))"
+        shineColor="hsl(var(--comp-motto-shine-color))"
       />
     </motion.p>
   );

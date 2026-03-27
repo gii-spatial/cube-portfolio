@@ -10,7 +10,7 @@ export default function CubeFaceLayout(props: Props): ReactElement {
 
   return (
     <div className="w-full h-full flex flex-col items-center justify-center gap-2">
-      {Icon && <Icon className="w-7 h-7 ml-1" fill="#FFFFFF" />}
+      {Icon && <Icon className="w-7 h-7 ml-1" />}
       <span>{label}</span>
     </div>
   );

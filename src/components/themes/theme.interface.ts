@@ -6,7 +6,14 @@ type CSSVariables = [
   "--foreground",
   "--border",
   "--accent",
-  "--cube-border",
+
+  // TODO: Add JS Docs
+
+  "--comp-cube-corner-accents",
+  "--comp-cube-border-color",
+
+  "--comp-motto-font-color",
+  "--comp-motto-shine-color",
 ];
 
 export type ThemePalette = {

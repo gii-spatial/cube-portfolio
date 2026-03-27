@@ -19,7 +19,11 @@ const snow: ThemePalette = {
     "--border": "200 55% 78%",
     "--accent": "195 90% 65%",
 
-    "--cube-border": "#7FBFD9",
+    "--comp-cube-corner-accents": "#1B3B5A",
+    "--comp-cube-border-color": "#1B3B5A",
+
+    "--comp-motto-font-color": "210 25% 18%",
+    "--comp-motto-shine-color": "200 50% 95%",
   },
 };
 

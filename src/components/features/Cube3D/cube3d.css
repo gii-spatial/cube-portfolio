@@ -28,7 +28,7 @@
   font-weight: bold;
   
   border: 2px solid;
-  border-color: var(--cube-border);
+  border-color: var(--comp-cube-border-color);
   
 
   display: flex;

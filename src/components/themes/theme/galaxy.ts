@@ -19,7 +19,11 @@ const galaxy: ThemePalette = {
     "--border": "240 20% 18%",
     "--accent": "258 90% 66%",
 
-    "--cube-border": "#525252",
+    "--comp-cube-corner-accents": "#1B3B5A",
+    "--comp-cube-border-color": "#1B3B5A",
+
+    "--comp-motto-font-color": "210 40% 25%",
+    "--comp-motto-shine-color": "200 50% 95%",
   },
 };
 

@@ -14,7 +14,7 @@ export default function Header({ title }: { title: string }): ReactElement {
           transition={{ duration: 0.6, ease: "easeOut" }}
           className="text-4xl"
         >
-          {title}
+          {title}aa
         </motion.h1>
         <button
           onClick={zoomOut}

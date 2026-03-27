@@ -26,11 +26,17 @@ export default function LinkIcon({
       aria-label={ariaLabel}
       {...slotProps?.root}
       className={twMerge(
-        clsx(
-          "text-white hover:text-neutral-300 transition-colors duration-200",
-          slotProps?.root?.className,
-        ),
+        clsx("transition-colors duration-200", slotProps?.root?.className),
       )}
+      style={{
+        color: "hsl(var(--foreground))",
+      }}
+      onMouseEnter={(e) => {
+        e.currentTarget.style.color = "hsl(var(--foreground) / 0.85)";
+      }}
+      onMouseLeave={(e) => {
+        e.currentTarget.style.color = "hsl(var(--foreground))";
+      }}
     >
       <IconComponent
         {...slotProps?.icon}
