@@ -1,105 +1,146 @@
-import React, { type ReactElement, useState, useRef, useEffect } from "react";
+import {
+  type ReactElement,
+  type CSSProperties,
+  type ReactNode,
+  useState,
+  useRef,
+  useEffect,
+} from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { ChevronDown } from "lucide-react";
-import { useTheme } from "@/components/themes";
+import { tailwindMerge } from "@/global.utils";
 
-interface DropdownItem<T extends React.Key = string> {
+interface Item<T extends React.Key = string> {
   id: T;
   label: string;
   color?: string;
 }
 
-interface DropdownBaseProps<T extends React.Key = string> {
-  items: DropdownItem<T>[];
-  selectedId: T;
-  onSelect: (id: T) => void;
-  startIcon?: React.ReactNode;
-  className?: string;
-  buttonClassName?: string;
-  dropdownClassName?: string;
-  style?: React.CSSProperties;
+interface Props<T extends React.Key = string> {
+  options: Item<T>[];
+  startIcon?: ReactNode;
+  value: T;
+  styles?: {
+    dropdownStyles?: CSSProperties;
+  };
+  classNames?: {
+    rootClassName?: string;
+    buttonClassName?: string;
+    dropdownClassName?: string;
+  };
+  onSelect: (item: T) => void;
 }
 
-export default function DropdownBase<T extends React.Key>({
-  items,
-  selectedId,
-  onSelect,
-  startIcon,
-  className = "",
-  buttonClassName = "",
-  dropdownClassName = "",
-  style,
-}: DropdownBaseProps<T>): ReactElement {
-  const { palette } = useTheme();
+function DropdownBase<T extends React.Key>(props: Props<T>): ReactElement {
+  const {
+    options,
+    value,
+    onSelect,
+    startIcon,
+    classNames = {},
+    styles = {},
+  } = props;
+
+  const { dropdownStyles = {} } = styles;
+  const {
+    rootClassName = "",
+    buttonClassName = "",
+    dropdownClassName = "",
+  } = classNames;
+
   const [open, setOpen] = useState(false);
   const [dropUp, setDropUp] = useState(false);
   const [maxHeight, setMaxHeight] = useState<number | undefined>();
-  const dropdownRef = useRef<HTMLDivElement>(null);
+
+  // trackers
+  const rootRef = useRef<HTMLDivElement>(null);
   const buttonRef = useRef<HTMLButtonElement>(null);
 
-  const selectedItem = items.find((i) => i.id === selectedId);
+  const selectedItem = options.find((o) => o.id === value);
 
-  // Close dropdown if clicked outside
+  const handleDropdownToggle = () => {
+    setOpen((prev) => !prev);
+  };
+
+  /**
+   * Recalculate dropdown position and max height on open, and on window resize.
+   * Helpful especially on mobile Safari with its dynamic toolbars.
+   * We use requestAnimationFrame to ensure we get accurate measurements after the dropdown has rendered.
+   */
   useEffect(() => {
-    const handleClickOutside = (e: MouseEvent) => {
-      if (
-        dropdownRef.current &&
-        !dropdownRef.current.contains(e.target as Node)
-      ) {
-        setOpen(false);
-      }
-    };
-    document.addEventListener("mousedown", handleClickOutside);
-    return () => document.removeEventListener("mousedown", handleClickOutside);
-  }, []);
+    if (!open) return;
+    if (buttonRef.current === null || rootRef.current === null) return; // defensive check
 
-  // Adjust dropdown position and maxHeight on open
-  useEffect(() => {
-    if (!open || !buttonRef.current || !dropdownRef.current) return;
-
-    // Use requestAnimationFrame to let Safari render first
     requestAnimationFrame(() => {
-      const buttonRect = buttonRef.current!.getBoundingClientRect();
-      const dropdownHeight = dropdownRef.current!.offsetHeight;
+      if (buttonRef.current === null || rootRef.current === null) return;
+      const buttonRect = buttonRef.current.getBoundingClientRect();
+      const dropdownHeight = rootRef.current.offsetHeight;
+
       const spaceBelow = window.innerHeight - buttonRect.bottom;
       const spaceAbove = buttonRect.top;
 
-      // Add safety margin for iOS Safari toolbars
+      // Safety margin for iOS Safari toolbars
       const SAFETY_MARGIN = /iPad|iPhone|iPod/.test(navigator.userAgent)
         ? 120
-        : 20;
+        : 30;
 
-      if (
+      const shouldDropUp =
         spaceBelow - SAFETY_MARGIN < dropdownHeight &&
-        spaceAbove > dropdownHeight
-      ) {
-        setDropUp(true);
-        setMaxHeight(spaceAbove - SAFETY_MARGIN);
-      } else {
-        setDropUp(false);
-        setMaxHeight(spaceBelow - SAFETY_MARGIN);
-      }
+        spaceAbove > dropdownHeight;
+
+      const maxAvailableHeight = shouldDropUp
+        ? spaceAbove - SAFETY_MARGIN
+        : spaceBelow - SAFETY_MARGIN;
+
+      setDropUp(shouldDropUp);
+      setMaxHeight(maxAvailableHeight);
     });
   }, [open]);
 
+  //  Close dropdown handlers
+  useEffect(() => {
+    const handleClickOutside = (e: MouseEvent) => {
+      if (rootRef.current?.contains(e.target as Node)) return;
+      setOpen(false);
+    };
+
+    const handleEscape = (e: KeyboardEvent) => {
+      if (e.key === "Escape") setOpen(false);
+    };
+
+    document.addEventListener("mousedown", handleClickOutside);
+    document.addEventListener("keydown", handleEscape);
+
+    return () => {
+      document.removeEventListener("mousedown", handleClickOutside);
+      document.removeEventListener("keydown", handleEscape);
+    };
+  }, []);
+
   return (
-    <div ref={dropdownRef} className={`relative w-fit ${className}`}>
+    <div
+      ref={rootRef}
+      className={tailwindMerge("relative w-fit", rootClassName)}
+    >
       <button
         ref={buttonRef}
-        type="button"
-        onClick={() => setOpen((prev) => !prev)}
-        className={`flex flex-row justify-between items-center bg-transparent text-[inherit] rounded-md px-2 py-2 focus:outline-none focus:ring-0 transition-all duration-150 ${buttonClassName} border-red `}
+        onClick={handleDropdownToggle}
+        className={tailwindMerge(
+          ` flex flex-row justify-between items-center 
+            px-2 py-2 rounded-md bg-background font-medium
+            focus:outline-none focus:ring-0 transition-all duration-150`,
+          buttonClassName,
+        )}
         style={{
-          borderColor: "var(--comp-cube-border-color)",
           borderWidth: 1,
           borderStyle: "solid",
+          borderColor: "var(--comp-cube-border-color)",
         }}
       >
         <span className="flex items-center gap-2 mx-2">
           {startIcon && <span>{startIcon}</span>}
-          <span className="font-medium">{selectedItem?.label}</span>
+          <span>{selectedItem?.label}</span>
         </span>
-
         <ChevronDown size={18} />
       </button>
 
@@ -110,29 +151,30 @@ export default function DropdownBase<T extends React.Key>({
             animate={{ opacity: 1, scale: 1 }}
             exit={{ opacity: 0, scale: 0.95 }}
             transition={{ type: "spring", stiffness: 200, damping: 20 }}
-            className={`absolute w-full border rounded-md shadow-lg z-50 overflow-auto ${dropdownClassName}`}
+            className={`absolute w-full border bg-background rounded-md shadow-lg z-50 overflow-auto ${dropdownClassName}`}
             style={{
               top: dropUp ? "auto" : "100%",
               bottom: dropUp ? "100%" : "auto",
               marginTop: dropUp ? 0 : 4,
               marginBottom: dropUp ? 4 : 0,
               maxHeight: maxHeight,
-              backgroundColor: palette.background,
-              ...style,
+              ...dropdownStyles,
             }}
           >
-            {items.map((item) => (
+            {options.map((option) => (
               <li
-                key={item.id}
+                key={option.id}
                 onClick={() => {
-                  onSelect(item.id);
+                  onSelect(option.id);
                   setOpen(false);
                 }}
                 className={`px-4 py-2 cursor-pointer hover:text-white transition-colors duration-150 ${
-                  item.color ? `hover:bg-[${item.color}]` : "hover:bg-gray-700"
+                  option.color
+                    ? `hover:bg-[${option.color}]`
+                    : "hover:bg-gray-700"
                 }`}
               >
-                {item.label}
+                {option.label}
               </li>
             ))}
           </motion.ul>
@@ -141,3 +183,6 @@ export default function DropdownBase<T extends React.Key>({
     </div>
   );
 }
+
+export default DropdownBase;
+export { type Item as DropdownItem, type Props as DropdownBaseProps };

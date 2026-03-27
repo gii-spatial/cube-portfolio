@@ -26,21 +26,9 @@ export default function MobileNavigation(
   return (
     <div className="relative w-full max-w-xs h-fit">
       <DropdownBase
-        items={items}
-        selectedId={selectedFace}
+        options={items}
+        value={selectedFace}
         onSelect={handleSelect}
-        className=""
-        buttonClassName="
-          w-full p-2 pr-3 text-base rounded-sm
-          outline outline-1 outline-white/60 focus:outline-2 focus:outline-white
-          bg-transparent cursor-pointer appearance-none transition hover:bg-white/10
-        "
-        dropdownClassName="bg-gray-900 rounded-sm shadow-lg text-base"
-        style={{
-          borderWidth: 1,
-          borderStyle: "solid",
-          borderColor: "red",
-        }}
       />
     </div>
   );
