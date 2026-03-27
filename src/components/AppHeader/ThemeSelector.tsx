@@ -1,12 +1,11 @@
 import { PaletteIcon } from "lucide-react";
-import { useTheme } from "@/components/themes";
-import { themes } from "@/components/themes/theme";
+import { ThemePaletteRecord, useTheme } from "@/components/themes";
 import DropdownBase from "../_core/dropdowns/DropdownBase";
 
 export default function ThemeSelector() {
   const { theme, setTheme, palette } = useTheme();
 
-  const items = themes.map((t) => ({
+  const items = Object.entries(ThemePaletteRecord).map(([_k, t]) => ({
     id: t.id,
     label: t.title,
     color: t.accent,

@@ -1,4 +1,5 @@
-export type Theme = "galaxy" | "forest";
+export const Themes = ["galaxy", "forest", "snow"] as const;
+export type Theme = (typeof Themes)[number];
 
 type CSSVariables = [
   "--background",
