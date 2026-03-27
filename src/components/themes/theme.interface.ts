@@ -8,6 +8,7 @@ type CSSVariables = [
   "--accent",
 
   // TODO: Add JS Docs
+  "--comp-footer-text-color",
 
   "--comp-cube-corner-accents",
   "--comp-cube-border-color",

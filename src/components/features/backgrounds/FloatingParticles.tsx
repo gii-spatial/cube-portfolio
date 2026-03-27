@@ -1,6 +1,5 @@
 import { type ReactElement, useMemo } from "react";
 import { motion } from "framer-motion";
-import { useTheme } from "@/components/themes";
 
 interface Particle {
   left: number;
@@ -30,9 +29,6 @@ export default function FloatingParticles(props: Props): ReactElement {
     className = "",
   } = props;
 
-  const { palette } = useTheme();
-  const particleColorFinal = particleColor ?? palette.particleColor;
-
   const particles = useMemo<Particle[]>(() => {
     return Array.from({ length: count }).map(() => ({
       left: Math.random() * 100,
@@ -54,7 +50,7 @@ export default function FloatingParticles(props: Props): ReactElement {
           style={{
             width: size,
             height: size,
-            backgroundColor: particleColorFinal,
+            backgroundColor: particleColor,
             left: `${p.left}%`,
             top: `${p.top}%`,
           }}
