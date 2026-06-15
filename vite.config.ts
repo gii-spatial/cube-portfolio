@@ -6,7 +6,7 @@ import path from "path";
 
 export default defineConfig({
   plugins: [react(), svgr()],
-  base: process.env.VITE_BASE_PATH || "/cube-portfolio",
+  base: process.env.VITE_BASE_PATH || "/",
   resolve: {
     alias: {
       "@": path.resolve(__dirname, "./src"),
